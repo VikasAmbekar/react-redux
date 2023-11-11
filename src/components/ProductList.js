@@ -3,7 +3,7 @@ import {Header} from "./Header";
 import axios from "axios";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setProducts} from "../redux/actions/productAction";
+import {fetchProducts, setProducts} from "../redux/actions/productAction";
 
 const ProductPage = () => {
     // here useSelector is used to get the redux state
@@ -12,16 +12,16 @@ const ProductPage = () => {
     const dispatch = useDispatch();
 
     // calling fakeApiStore here
-    const fetchData = async () => {
-        const response = await axios.get('https://fakestoreapi.com/products')
-            .catch((error) => {
-                error.message = error
-            })
-        // setting the data into the redux store
-        dispatch(setProducts(response.data));
-    }
+    // const fetchData = async () => {
+    //     const response = await axios.get('https://fakestoreapi.com/products')
+    //         .catch((error) => {
+    //             error.message = error
+    //         })
+    //     // setting the data into the redux store
+    //     dispatch(setProducts(response.data));
+    // }
     useEffect(() => {
-        fetchData()
+        dispatch(fetchProducts());
     }, []);
     console.log(products);
     return (
